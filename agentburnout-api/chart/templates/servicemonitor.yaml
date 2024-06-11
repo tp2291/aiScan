@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "agentburnout-api.fullname" $ }}-sm
+  namespace: {{ .Release.Namespace }}
+spec:
+  endpoints:
+    - port: http
+      path: /actuator/prometheus
+  selector:
+    matchLabels:
+      appService: "{{ .Values.env.required.appName }}{{ .Values.env.optional.appPrefix }}"

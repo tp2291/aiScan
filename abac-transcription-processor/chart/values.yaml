@@ -1,0 +1,39 @@
+image:
+  repository: 244386282524.dkr.ecr.us-west-2.amazonaws.com/saa-agentburnout/abac-transcription-processor
+  pullPolicy: IfNotPresent
+  tag: REPLACE_WITH_TAG
+
+env:
+  required:
+    appName: abac-transcription-processor
+    buildNumber: JENKINS_ENV.BUILD_NUMBER
+    buildId: JENKINS_ENV.BUILD_ID
+    buildUrl: JENKINS_ENV.BUILD_URL
+    buildTag: JENKINS_ENV.BUILD_TAG
+    gitCommit: REPLACE_WITH_TAG
+    gitBranch: JENKINS_ENV.BRANCH
+    DC: override
+    REDIS_HOST: override
+    replicaCount: 3
+    isCanaryUpgradeEnabled: "0"
+    isInCanaryMode: "0"
+    replicaCountForCanaryDeployment: 1
+    replicaCountForDefaultDeployment: 1
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX
+
+service:
+  type: ClusterIP
+  externalPort: 8080
+  annotations: { }
+
+resources:
+  limits:
+    cpu: 400m
+    memory: 1536Mi
+  requests:
+    cpu: 400m
+    memory: 1536Mi
+
+serviceAccount:
+  create: false

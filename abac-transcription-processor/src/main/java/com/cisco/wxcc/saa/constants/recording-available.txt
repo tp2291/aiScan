@@ -1,0 +1,75 @@
+//For reference only
+
+{
+  "path": "4f07a18c-cfef-429c-981f-c1c367979a0c/INCOMING/ELAPSED/ACD/CAR",
+  "publishTimestamp": "2024-05-13T16:43:24.174064Z",
+  "eventName": "recording-available",
+  "entityId": "fde13bb3-2050-4a7f-a636-a07cb9b4b40b",
+  "attrMap": {
+    "productVersion": "2.0",
+    "outdialFlag": "0",
+    "contactId": "fde13bb3-2050-4a7f-a636-a07cb9b4b40b",
+    "recordings": [
+      {
+        "recordingFileName": "combinedRecordings.wav",
+        "recordingFileSize": 1247098,
+        "recordingType": "Segment",
+        "startTime": 1715618525195,
+        "stopTime": 1715618603135,
+        "recordingFilePath": "4f07a18c-cfef-429c-981f-c1c367979a0c/fde13bb3-2050-4a7f-a636-a07cb9b4b40b/fde13bb3-2050-4a7f-a636-a07cb9b4b40b/combinedRecordings.wav",
+        "recordingId": "fde13bb3-2050-4a7f-a636-a07cb9b4b40b",
+        "participants": [
+          "918095996892",
+          "2cf2233e-7153-4b6d-9b1b-bd59d70aff92"
+        ]
+      }
+    ],
+    "epSystemId": "acb9f627-5fa8-4f66-bf49-ee85215ef18a",
+    "eventName": "recording-available",
+    "epId": "acb9f627-5fa8-4f66-bf49-ee85215ef18a",
+    "contactType": "telephony",
+    "dn": "+19704418502",
+    "ani": "918095996892",
+    "epName": "EP-2"
+  },
+  "timestamp": "1715618604069"
+}
+
+
+//Transferred call
+
+{
+  "path": "4f07a18c-cfef-429c-981f-c1c367979a0c/INCOMING/ELAPSED/ACD/CAR",
+  "publishTimestamp": "2024-05-14T06:03:08.111632Z",
+  "eventName": "recording-available",
+  "entityId": "e503d06f-f3ff-4631-be87-44ff682e8802",
+  "attrMap": {
+    "productVersion": "2.0",
+    "outdialFlag": "0",
+    "contactId": "e503d06f-f3ff-4631-be87-44ff682e8802",
+    "recordings": [
+      {
+        "recordingFileName": "combinedRecordings.wav",
+        "recordingFileSize": 1348218,
+        "recordingType": "Segment",
+        "startTime": 1715666502695,
+        "stopTime": 1715666586955,
+        "recordingFilePath": "4f07a18c-cfef-429c-981f-c1c367979a0c/e503d06f-f3ff-4631-be87-44ff682e8802/e503d06f-f3ff-4631-be87-44ff682e8802/combinedRecordings.wav",
+        "recordingId": "e503d06f-f3ff-4631-be87-44ff682e8802",
+        "participants": [
+          "8095554325",
+          "966aeaf2-7318-44b6-9b96-aea5ab05c32e",
+          "f394f3a9-d12c-44be-8f80-0323ddcd65de"
+        ]
+      }
+    ],
+    "epSystemId": "a158c9b5-9e24-4702-91d7-0c103b78c0a9",
+    "eventName": "recording-available",
+    "epId": "a158c9b5-9e24-4702-91d7-0c103b78c0a9",
+    "contactType": "telephony",
+    "dn": "+19994443430",
+    "ani": "8095554325",
+    "epName": "ep-automation-new2"
+  },
+  "timestamp": "1715666587950"
+}

@@ -1,0 +1,13 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+spring:
+  profile: loadus1
+env:
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX
+  required:
+    DC: loadus1
+    replicaCount: 3
+    NOTIFS_REGISTER_URL: "https://api.loadus1.ciscoccservice.com/v1/realtime/subscribe"

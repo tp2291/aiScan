@@ -1,0 +1,9 @@
+robotframework~=6.0.2
+robotframework-seleniumlibrary
+robotframework-requests
+robotframework-datadriver
+robotframework-pythonlibcore
+openpyxl
+numpy
+requests
+confluent_kafka

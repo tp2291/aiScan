@@ -1,0 +1,39 @@
+image:
+  # repository: 300447193107.dkr.ecr.us-east-1.amazonaws.com/saa-agentburnout-dev
+  repository: 244386282524.dkr.ecr.us-west-2.amazonaws.com/saa-agentburnout/cache-validator-agentburnout
+  pullPolicy: IfNotPresent
+  tag: override
+
+
+env:
+  required:
+    appName: cache-validator-agentburnout
+    buildNumber: JENKINS_ENV.BUILD_NUMBER
+    buildId: JENKINS_ENV.BUILD_ID
+    buildUrl: JENKINS_ENV.BUILD_URL
+    buildTag: JENKINS_ENV.BUILD_TAG
+    gitCommit: REPLACE_WITH_TAG
+    gitBranch: JENKINS_ENV.BRANCH
+    DC: override
+    REDIS_HOST: override
+    replicaCount: 3
+    jobSchedule: override
+    BROKER_URL: override
+    CLIENT_ID: override
+    CLIENT_SECRET: override
+
+service:
+  type: ClusterIP
+  externalPort: 8080
+  annotations: { }
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 2192Mi
+  requests:
+    cpu: 1000m
+    memory: 2192Mi
+
+serviceAccount:
+  create: false

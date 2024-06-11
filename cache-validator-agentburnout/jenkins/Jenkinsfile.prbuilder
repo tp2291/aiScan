@@ -1,0 +1,83 @@
+#!groovy
+
+@Library('cccPipeline') _
+@Library('k8s-app-pipeline')
+import Constants
+
+def pipelineUtils = new PipelineUtils()
+failedStages = []
+final int expectedOverallApprovals = 1
+final int expectedLastCommitApprovals = 1
+final String SONAR_PROJECT = "saa-cache-validator-agentburnout"
+final String SONAR_PROJECTKEY = "saa-cache-validator-agentburnout"
+
+node(BUILD_NODE_LABEL) {
+    try {
+        ConfigUtils configUtils = new ConfigUtils()
+        configUtils.setGitHubIntegrationEnv()
+        
+        checkout scm
+        echo sh(script: 'env|sort', returnStdout: true)
+
+        cccStage('Build the jar', failedStages) {
+            dir("${env.WORKSPACE}/cache-validator-agentburnout") {
+                sh "mvn install"
+            }
+        }
+
+        cccStage('SonarQube Analysis', failedStages) {
+            withCredentials([string(credentialsId: ENGCI_SONAR_TOKEN, variable: 'SONAR_TOKEN')]) {
+                dir("${env.WORKSPACE}/cache-validator-agentburnout") {
+                    sh """
+                        set +x
+                        mvn -Dsonar.host.url=${Constants.SONARQUBE_HOST} -Dsonar.login=${SONAR_TOKEN} -Dsonar.projectName=${SONAR_PROJECT} -Dsonar.projectKey=${SONAR_PROJECTKEY} -Dsonar.pullrequest.key="PR-${ghprbPullId}" -Dsonar.pullrequest.branch=${ghprbPullId} -Dsonar.pullrequest.base=${ghprbTargetBranch}  sonar:sonar
+                        set -x
+                    """
+                }
+            }
+            def sqcontext = "sonarqube/qualitygate"
+            def props = readProperties  file: 'cache-validator-agentburnout/target/sonar/report-task.txt'
+            def sonarServerUrl=props['serverUrl']
+            def ceTaskUrl=props['ceTaskUrl']
+            def projectKey=props['projectKey']
+            def ceTask
+
+            timeout(time: 10, unit: 'MINUTES') {
+                waitUntil {
+                    def response = httpRequest url : ceTaskUrl, authentication: 'ENGCI_SQLOGIN', validResponseCodes: '200:404'
+                    ceTask = readJSON text: response.content
+                    echo ceTask.toString()
+                    return "SUCCESS".equals(ceTask["task"]["status"])
+                }
+            }
+
+            def response1 = httpRequest url : sonarServerUrl + "/api/qualitygates/project_status?analysisId=" + ceTask["task"]["analysisId"], authentication: 'ENGCI_SQLOGIN', validResponseCodes: '200:404'
+            def qualitygate =  readJSON text: response1.content
+            def qualitygateUrl = "${sonarServerUrl}/dashboard?id=${projectKey}&pullRequest=PR-${ghprbPullId}"
+
+            if ("ERROR".equals(qualitygate["projectStatus"]["status"])) {
+                def comment_text = "<h5>SonarQube quality gate failed, Click <a href=${qualitygateUrl}>here</a> to see the details on SonarQube dashboard.</h4>"
+                pipelineUtils.updatePrComments("${comment_text}")
+                pipelineUtils.updateSqPrStatus("${sqcontext}", "failure", "Failed", "${qualitygateUrl}")
+                error  "SonarQube Quality Gate is failed, please see the sonarqube dashboard"
+
+            } else {
+                pipelineUtils.updateSqPrStatus("${sqcontext}", "success", "Passed", "${qualitygateUrl}")
+            }
+        }
+
+        pipelineUtils.setBuildStatus("${GITHUB_REPO_URL}","cache-validator-agentburnout-pr-builder","Build succeeded","SUCCESS");
+        currentBuild.result = "SUCCESS"
+
+        def canMergeStatus = pipelineUtils.canMerge("${GITHUB_PAT}", "${GITHUB_REPO_ORG}", "${ghprbPullId}", "${ghprbActualCommit}", "${ghprbCommentBody}", expectedOverallApprovals, expectedLastCommitApprovals)
+        if (canMergeStatus && currentBuild.result == "SUCCESS") {
+            cccStage('Merge', failedStages) {
+                pipelineUtils.mergePullRequest()
+            }
+        }
+    } catch (error) {
+        pipelineUtils.setBuildStatus("${GITHUB_REPO_URL}","cache-validator-agentburnout-pr-builder","Build failed","FAILURE");
+        currentBuild.result = "FAILURE"
+        throw error
+    }
+}

@@ -1,0 +1,114 @@
+#!groovy
+
+@Library('cccPipeline') _
+@Library('k8s-app-pipeline')
+import Constants
+
+def pipelineUtils = new PipelineUtils()
+failedStages = []
+final int expectedOverallApprovals = 1
+final int expectedLastCommitApprovals = 1
+final String SONAR_PROJECTKEY = "saa-agentburnout"
+final int DEPLOYMENT_REPLICA_COUNT = 0
+
+node(BUILD_NODE_LABEL) {
+    try {
+        ConfigUtils configUtils = new ConfigUtils()
+        configUtils.setGitHubIntegrationEnv()
+        
+        checkout scm
+        echo sh(script: 'env|sort', returnStdout: true)
+
+        cccStage("SonarQube Quality Gateway", failedStages) {
+            
+            dir("${env.WORKSPACE}/agentburnout") {
+                withCredentials([string(credentialsId: ENGCI_SONAR_TOKEN, variable: 'SONAR_TOKEN')]) {
+                    sh """
+                        set +x
+                        ${env.HOME}/sonar/bin/sonar-scanner -Dsonar.host.url=${Constants.SONARQUBE_HOST} -Dsonar.login=${SONAR_TOKEN} \
+                        -Dsonar.projectName=${SONAR_PROJECTKEY} -Dsonar.projectKey=${SONAR_PROJECTKEY} -Dsonar.pullrequest.key="PR-${ghprbPullId}" \
+                        -Dsonar.pullrequest.branch=${ghprbSourceBranch} -Dsonar.pullrequest.base=${GITHUB_PR_TARGET_BRANCH} -Dsonar.sources=.
+                        set -x
+                    """
+                }
+
+                def sqcontext = "sonarqube/qualitygate"
+                def props = readProperties file: ".scannerwork/report-task.txt"
+                def sonarServerUrl=props['serverUrl']
+                def ceTaskUrl=props['ceTaskUrl']
+                def projectKey=props['projectKey']
+                def ceTask
+
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitUntil {
+                        def response = httpRequest url : ceTaskUrl, authentication: 'ENGCI_SQLOGIN', validResponseCodes: '200:404'
+                        ceTask = readJSON text: response.content
+                        echo ceTask.toString()
+                        return "SUCCESS".equals(ceTask["task"]["status"])
+                    }
+                }
+
+                def response1 = httpRequest url : sonarServerUrl + "/api/qualitygates/project_status?analysisId=" + ceTask["task"]["analysisId"], authentication: 'ENGCI_SQLOGIN', validResponseCodes: '200:404'
+                def qualitygate =  readJSON text: response1.content
+                def qualitygateUrl = "${sonarServerUrl}/dashboard?id=${projectKey}&pullRequest=PR-${ghprbPullId}"
+
+                if ("ERROR".equals(qualitygate["projectStatus"]["status"])) {
+                    def comment_text = "<h5>SonarQube quality gate failed, Click <a href=${qualitygateUrl}>here</a> to see the details on SonarQube dashboard.</h4>"
+                    pipelineUtils.updatePrComments("${comment_text}")
+                    pipelineUtils.updateSqPrStatus("${sqcontext}", "failure", "Failed", "${qualitygateUrl}")
+                    error  "SonarQube Quality Gate is failed, please see the sonarqube dashboard"
+
+                } else {
+                    pipelineUtils.updateSqPrStatus("${sqcontext}", "success", "Passed", "${qualitygateUrl}")
+                }
+            }
+            
+        }
+
+        cccStage('Deploy agentburnout', failedStages) {
+            build job: "${K8S_DEPLOY_JOB}", parameters: [
+                    string(name: 'BRANCH', value: "${GITHUB_PR_SOURCE_BRANCH}"),
+                    string(name: 'APPNAME_PREFIX', value: "${APP_NAME_PREFIX}"),
+                    string(name: 'APPNAME', value: "${APPNAME}"),
+                    string(name: 'DATACENTER', value: "${TENANT}"),
+                    string(name: 'TOOLS_DATACENTER', value: "${TOOLS_DATACENTER}"),
+                    string(name: 'AWS_S3_ID', value: "${AWS_S3_ID}"),
+                    string(name: 'K8S_NAMESPACE', value: "${K8S_NAMESPACE}"),
+                    string(name: 'RELEASE_TYPE', value: "${RELEASE_TYPE}"),
+                    string(name: 'ECR_NAMESPACE', value: "${ECR_NAMESPACE}"),
+                    string(name: 'CHART_FILE_NAME', value: "${CHART_FILE_NAME}"),
+                    string(name: 'TEST_BUCKET_PREFIX', value: "PR-${ghprbPullId}/${currentBuild.number}"),
+                    booleanParam(name: 'DEPLOY_FT_JOB', value: false)]
+
+        }
+        
+        pipelineUtils.setBuildStatus("${GITHUB_REPO_URL}","agentburnout-prbuilder","Build succeeded","SUCCESS");
+        currentBuild.result = "SUCCESS"
+
+        cccStage('Scale agentburnout deployment to zero', failedStages) {
+            build job: "${K8S_SCALE_JOB}", parameters: [
+                    string(name: 'BRANCH', value: "${GITHUB_PR_SOURCE_BRANCH}"),                
+                    string(name: 'APPNAME_PREFIX', value: "${APP_NAME_PREFIX}"),
+                    string(name: 'APPNAME', value: "${APPNAME}"),
+                    string(name: 'DEPLOYMENT_NAME', value: "${APP_NAME_PREFIX}-${APPNAME}"),
+                    string(name: 'DEPLOYMENT_REPLICA_COUNT', value: "${DEPLOYMENT_REPLICA_COUNT}"),
+                    string(name: 'DATACENTER', value: "${TENANT}"),
+                    string(name: 'TOOLS_DATACENTER', value: "${TOOLS_DATACENTER}"),
+                    string(name: 'AWS_S3_ID', value: "${AWS_S3_ID}"),
+                    string(name: 'K8S_NAMESPACE', value: "${K8S_NAMESPACE}"),
+                    string(name: 'ECR_NAMESPACE', value: "${ECR_NAMESPACE}")]
+
+        }
+
+        def canMergeStatus = pipelineUtils.canMerge("${GITHUB_PAT}", "${GITHUB_REPO_ORG}", "${ghprbPullId}", "${ghprbActualCommit}", "${ghprbCommentBody}", expectedOverallApprovals, expectedLastCommitApprovals)
+        if (canMergeStatus && currentBuild.result == "SUCCESS") {
+            cccStage('Merge', failedStages) {
+                pipelineUtils.mergePullRequest()
+            }
+        }
+    } catch (error) {
+        pipelineUtils.setBuildStatus("${GITHUB_REPO_URL}","agentburnout-prbuilder","Build failed","FAILURE");
+        currentBuild.result = "FAILURE"
+        throw error
+    }
+}

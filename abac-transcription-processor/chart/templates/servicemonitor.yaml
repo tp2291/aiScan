@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "abac-transcription-processor.deploymentName" . }}-sm
+  namespace: {{ .Release.Namespace }}
+spec:
+  endpoints:
+    - port: http
+      path: /metrics
+  selector:
+    matchLabels:
+      appService: {{ include "abac-transcription-processor.deploymentName" . }}

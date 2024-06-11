@@ -1,0 +1,37 @@
+image:
+  # repository: 300447193107.dkr.ecr.us-east-1.amazonaws.com/saa-agentburnout-dev
+  repository: 244386282524.dkr.ecr.us-west-2.amazonaws.com/saa-agentburnout/agentburnout-api
+  pullPolicy: IfNotPresent
+
+cluster: default
+
+spring:
+  profile: dev
+
+env:
+  required:
+    appName: agentburnout-api
+    webapp_logstash_ip: "fluentd.service.consul"
+    webapp_logstash_port: "10006"
+    replicaCount: 3
+    oauth_properties_file: "oauth.properties"
+    NOTIFS_REGISTER_URL: override
+    DC: override
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX
+
+service:
+  type: ClusterIP
+  externalPort: 8080
+  annotations: { }
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 2000Mi
+  requests:
+    cpu: 1000m
+    memory: 2000Mi
+
+serviceAccount:
+  create: false

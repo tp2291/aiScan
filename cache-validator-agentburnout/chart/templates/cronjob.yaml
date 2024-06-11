@@ -1,0 +1,93 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "cache-validator-agentburnout.deploymentName" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "cache-validator-agentburnout.labels.standard" . | indent 4 }}
+spec:
+  schedule: "{{ .Values.env.required.jobSchedule }}"
+  successfulJobsHistoryLimit: 0 # Remove after successful completion
+  failedJobsHistoryLimit: 0
+  concurrencyPolicy: Replace
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 120
+      template:
+        metadata:
+          labels:
+{{ include "cache-validator-agentburnout.labels.standard" . | indent 12 }}
+          annotations:
+            vault.hashicorp.com/agent-init-first: "true" # avoid race condition
+            vault.hashicorp.com/agent-inject: "true"
+
+            # authentication
+            vault.hashicorp.com/auth-type: "approle"
+            vault.hashicorp.com/auth-path: "auth/{{ .Values.env.required.DC }}/approle"
+
+            # read vault secret and role-id from k8s secret
+            vault.hashicorp.com/agent-extra-secret: "keeper-creds"
+            vault.hashicorp.com/auth-config-role-id-file-path: "/vault/custom/role-id"
+            vault.hashicorp.com/auth-config-secret-id-file-path: "/vault/custom/secret-id"
+            vault.hashicorp.com/agent-pre-populate-only: "true"
+
+            # keeper namespacing
+            vault.hashicorp.com/namespace: "webexcc"
+
+            # ask SRE
+            vault.hashicorp.com/tls-skip-verify: "true"
+            vault.hashicorp.com/agent-inject-token: "true"
+            # machine-account creds
+            # writes orgId, name and password from `secret/{DCNAME}/saa-agentburnout/saa-agentburnout-{DCNAME}-machine` to /vault/secrets/machine-account.txt
+            vault.hashicorp.com/agent-inject-secret-machine-account.txt: "secret/{{ .Values.env.required.DC }}/saa-agentburnout/saa-agentburnout-{{ .Values.env.required.DC }}-machine"
+            vault.hashicorp.com/agent-inject-template-machine-account.txt: |
+              {{ "{{" }} with secret "secret/{{ .Values.env.required.DC }}/saa-agentburnout/saa-agentburnout-{{ .Values.env.required.DC }}-machine" -{{ "}}" }}
+              name={{ "{{" }} .Data.name {{ "}}" }}
+              password={{ "{{" }} .Data.password {{ "}}" }}
+              orgId={{ "{{" }} .Data.orgId {{ "}}" }}
+              {{ "{{" }}- end {{ "}}" }}
+
+            # DB creds
+            # writes orgId, name and password from `secret/{DCNAME}/aurora/agentburnout` to /vault/secrets/aurora-creds.txt
+            vault.hashicorp.com/agent-inject-secret-aurora-creds.txt: "secret/{{ .Values.env.required.DC }}/aurora/agentburnout"
+            vault.hashicorp.com/agent-inject-template-aurora-creds.txt: |
+              {{ "{{" }} with secret "secret/{{ .Values.env.required.DC }}/aurora/agentburnout" -{{ "}}" }}
+                  username={{ "{{" }} .Data.username {{ "}}" }}
+                  password={{ "{{" }} .Data.password {{ "}}" }}
+              {{ "{{" }}- end {{ "}}" }}
+            #Redis creds
+            vault.hashicorp.com/agent-inject-secret-redis.txt: "secret/{{ .Values.env.required.DC }}/elasticache/sunlight"
+            vault.hashicorp.com/agent-inject-template-redis.txt: |
+              {{ "{{" }} with secret "secret/{{ .Values.env.required.DC }}/elasticache/sunlight" -{{ "}}" }}
+                  password={{ "{{" }} .Data.password {{ "}}" }}
+              {{ "{{" }}- end {{ "}}" }}
+
+            vault.hashicorp.com/agent-inject-secret-split-value.txt: "secret/{{ .Values.env.required.DC }}/split/serverKey"
+            vault.hashicorp.com/agent-inject-template-split-value.txt: |
+              {{ "{{" }} with secret "secret/{{ .Values.env.required.DC }}/split/serverKey" -{{ "}}" }}
+              value={{ "{{" }} .Data.value {{ "}}" }}
+              {{ "{{" }}- end {{ "}}" }}
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: {{ .Chart.Name }}
+            image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            resources:
+              limits:
+                cpu: 1000m
+                memory: 2192Mi
+              requests:
+                cpu: 1000m
+                memory: 2192Mi
+            env:
+{{- range $name, $value := .Values.env.optional }}
+{{- if not (empty $value) }}
+                - name: {{ $name | quote }}
+                  value: {{ $value | quote }}
+{{- end }}
+{{- end }}
+{{- range $name, $value := .Values.env.required }}
+                - name: {{ $name | quote }}
+                  value: {{ $value | quote }}
+{{- end }}

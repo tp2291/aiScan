@@ -1,0 +1,20 @@
+image:
+  # repository: 300447193107.dkr.ecr.us-east-1.amazonaws.com/saa-agentburnout-dev
+  repository: 244386282524.dkr.ecr.us-west-2.amazonaws.com/saa-agentburnout/burnout-processor
+  pullPolicy: IfNotPresent
+
+env:
+  required:
+    appName: burnout-processor
+    DC: default
+    replicaCount: 3
+    webapp_logstash_ip: "fluentd.service.consul"
+    webapp_logstash_port: "10006"
+  optional:
+    appPrefix: override
+
+service:
+  type: ClusterIP
+  externalPort: 9090
+  annotations: { }
+

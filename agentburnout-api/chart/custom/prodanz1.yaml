@@ -1,0 +1,18 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+spring:
+  profile: prodanz1
+env:
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX
+  required:
+    DC: prodanz1
+    replicaCount: 3
+    oauth_properties_file: "oauth-prod.properties"
+    NOTIFS_REGISTER_URL: "https://api.wxcc-anz1.cisco.com/v1/realtime/subscribe"
+
+apigateway:
+  vanity:
+    url: api.wxcc-anz1.cisco.com

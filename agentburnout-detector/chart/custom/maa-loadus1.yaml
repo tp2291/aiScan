@@ -1,0 +1,10 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+env:
+  required:
+    DC: loadus1
+    REDIS_HOST: clustercfg.loadus1-sunlight.ik2bpp.use1.cache.amazonaws.com
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX

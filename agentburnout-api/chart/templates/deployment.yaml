@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "agentburnout-api.deploymentName" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "agentburnout-api.labels.standard" . | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      appName: {{ .Values.env.required.appName }}
+      appPrefix: {{ .Values.env.optional.appPrefix }}
+      appService: "{{ .Values.env.required.appName }}{{ .Values.env.optional.appPrefix }}"
+  replicas: {{ .Values.env.required.replicaCount }}
+  revisionHistoryLimit: 10
+  template:
+    metadata:
+      name: {{ include "agentburnout-api.deploymentName" . }}
+      labels:
+        appName: {{ .Values.env.required.appName }}
+        appPrefix: {{ .Values.env.optional.appPrefix }}
+        appService: "{{ .Values.env.required.appName }}{{ .Values.env.optional.appPrefix }}"
+        version: "{{ include "agentburnout-api.deploymentName" . }}"
+      annotations:
+        vault.hashicorp.com/agent-init-first: "true" # avoid race condition
+        vault.hashicorp.com/agent-inject: "true"
+
+        # authentication
+        vault.hashicorp.com/auth-type: "approle"
+        vault.hashicorp.com/auth-path: "auth/{{ .Values.env.required.DC }}/approle"
+
+        # read vault secret and role-id from k8s secret
+        vault.hashicorp.com/agent-extra-secret: "keeper-creds"
+        vault.hashicorp.com/auth-config-role-id-file-path: "/vault/custom/role-id"
+        vault.hashicorp.com/auth-config-secret-id-file-path: "/vault/custom/secret-id"
+
+        vault.hashicorp.com/agent-pre-populate-only: "true"
+
+        # keeper namespacing
+        vault.hashicorp.com/namespace: "webexcc"
+
+        # ask SRE
+        vault.hashicorp.com/tls-skip-verify: "true"
+        vault.hashicorp.com/agent-inject-token: "true"
+        # machine-account creds
+        # writes orgId, name and password from `secret/{DCNAME}/saa-agentburnout/saa-agentburnout-{DCNAME}-machine` to /vault/secrets/machine-account.txt
+        vault.hashicorp.com/agent-inject-secret-aurora-username.txt: "secret/{{ .Values.env.required.DC }}/aurora/agentburnout"
+        vault.hashicorp.com/agent-inject-template-aurora-username.txt: |
+          {{ "{{" }} with secret "secret/{{ .Values.env.required.DC }}/aurora/agentburnout" -{{ "}}" }}
+            {{ "{{" }} .Data.username {{ "}}" }}
+          {{ "{{" }}- end {{ "}}" }}
+        vault.hashicorp.com/agent-inject-secret-aurora-password.txt: "secret/{{ .Values.env.required.DC }}/aurora/agentburnout"
+        vault.hashicorp.com/agent-inject-template-aurora-password.txt: |
+          {{ "{{" }} with secret "secret/{{ .Values.env.required.DC }}/aurora/agentburnout" -{{ "}}" }}
+              {{ "{{" }} .Data.password {{ "}}" }}
+          {{ "{{" }}- end {{ "}}" }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: {{ .Values.spring.profile }}
+{{- range $name, $value := .Values.env.required }}
+{{- if not (empty $value) }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+{{- end }}
+{{- end }}
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2000Mi
+            requests:
+              cpu: 1000m
+              memory: 2000Mi

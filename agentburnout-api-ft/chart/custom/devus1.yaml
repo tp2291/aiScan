@@ -1,0 +1,7 @@
+image:
+  tag: REPLACE_WITH_TAG
+
+env:
+  test:
+    dataCenter: JENKINS_ENV.DATACENTER
+    vaultUrl: "https://keeper.cisco.com"

@@ -1,0 +1,16 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+env:
+  required:
+    DC: prodanz1
+    DAL_SEARCH_API: https://dal-search.prodanz1.ciscoccservice.com/data-api/search
+    CONFIG_SERVICE_URL: https://config-service.prodanz1.ciscoccservice.com
+    REDIS_HOST: clustercfg.prodanz1-sunlight.wfregd.apse2.cache.amazonaws.com
+    BROKER_URL: https://idbroker.webex.com/idb
+    CLIENT_ID: Cd626b8a09baace67ae84115f8c9aaedf952998e6ec0fda11c1a22fd63a5d1825
+    CLIENT_SECRET: 20c24e637a783fc0c23a78a406dae647f93575ffbde582b88544fafbbe41c538
+    replicaCount: 3
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX

@@ -1,0 +1,20 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+env:
+  required:
+    isCanaryUpgradeEnabled: "0"
+    isInCanaryMode: "0"
+    replicaCountForCanaryDeployment: 1
+    replicaCountForDefaultDeployment: 2
+    DC: qaus1
+    REDIS_HOST: clustercfg.qaus1-sunlight.ik2bpp.use1.cache.amazonaws.com
+    CONFIG_SERVICE_URL: https://config-service.qaus1.ciscoccservice.com
+    BROKER_URL: https://idbrokerbts.webex.com/idb
+    CONFIG_API: https://api.qaus1.ciscoccservice.com
+    CLIENT_ID: C6781d7076c30fe68ee624a89acd439af72b02f9a4a0b0fff63592d068333b20c
+    CLIENT_SECRET: ff2eebe0778202d88dec945c13340f5eddfd31a77225fdb133eeb2351980cbf9
+    jobSchedule: "*/10 * * * *"
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX

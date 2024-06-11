@@ -1,0 +1,13 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+spring:
+  profile: qaus1
+env:
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX
+  required:
+    DC: qaus1
+    replicaCount: 3
+    NOTIFS_REGISTER_URL: "https://api.qaus1.ciscoccservice.com/v1/realtime/subscribe"

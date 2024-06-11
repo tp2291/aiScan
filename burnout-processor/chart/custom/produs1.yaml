@@ -1,0 +1,13 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+env:
+  required:
+    isCanaryUpgradeEnabled: "0"
+    isInCanaryMode: "0"
+    replicaCountForCanaryDeployment: 1
+    replicaCountForDefaultDeployment: 10
+    DC: produs1
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX

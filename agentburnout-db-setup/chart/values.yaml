@@ -1,0 +1,12 @@
+image:
+  repository: 244386282524.dkr.ecr.us-west-2.amazonaws.com/saa-agentburnout/agentburnout-db-setup
+  tag: REPLACE_WITH_TAG
+  pullPolicy: IfNotPresent
+
+env:
+  required:
+    appName: agentburnout-db-setup
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX
+
+datacenter: override

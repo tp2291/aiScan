@@ -1,0 +1,30 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "abac-transcription-processor.name" . }}-alert-rules
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "abac-transcription-processor.labels.standard" . | indent 4 }}
+spec:
+  groups:
+    - name: SAA_ABACTP_Alerts
+      rules:
+        # service down alert
+        - alert: ServiceDown
+          expr: absent(up{namespace="saa-agentburnout",job="{{ include "abac-transcription-processor.name" . }}"})
+          for: 1m
+          labels:
+            severity: critical
+            maintainedby: saa-agentburnout
+          annotations:
+            summary: Service is down (serviceName {{ "{{" }} $labels.job {{ "}}" }})
+            description: '{{ "{{" }} $labels.job {{ "}}" }} service has been down for more than 1 minutes.'
+
+          #event processing error
+        - alert: eventProcessingError
+          expr: sum(increase(saa_abactp_events_skipped{namespace="saa-agentburnout",job="{{ include "abac-transcription-processor.name" . }}"}[1m])) >= 3
+          labels:
+            severity: critical
+            maintainedby: saa-agentburnout
+          annotations:
+            summary: Errors encountered in processing events

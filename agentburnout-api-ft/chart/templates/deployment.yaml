@@ -1,0 +1,97 @@
+{{- $root := . -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "agentburnout-api-ft.jobname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "agentburnout-api-ft.labels.standard" . | indent 4 }}
+spec:
+  completions: 1
+  parallelism: 1
+  ttlSecondsAfterFinished: 300
+  backoffLimit: 0
+  template:
+    metadata:
+      name: {{ include "agentburnout-api-ft.fullname" . }}
+      labels:
+        appName: {{ .Values.env.required.appName }}
+        appPrefix: {{ .Values.env.optional.appPrefix }}
+        appTestJobName: {{ include "agentburnout-api-ft.jobname" . }}
+      annotations:
+        "sidecar.istio.io/inject": "false"
+        vault.hashicorp.com/agent-init-first: "true" # avoid race condition
+        vault.hashicorp.com/agent-inject: "true"
+        # authentication
+        vault.hashicorp.com/auth-type: "approle"
+        vault.hashicorp.com/auth-path: "auth/{{ .Values.datacenter }}/approle"
+        # read vault secret and role-id from k8s secret
+        vault.hashicorp.com/agent-extra-secret: "keeper-creds"
+        vault.hashicorp.com/auth-config-role-id-file-path: "/vault/custom/role-id"
+        vault.hashicorp.com/auth-config-secret-id-file-path: "/vault/custom/secret-id"
+
+        vault.hashicorp.com/agent-pre-populate-only: "true"
+
+        # keeper namespacing
+        vault.hashicorp.com/namespace: "webexcc"
+
+        # ask SRE
+        vault.hashicorp.com/tls-skip-verify: "true"
+        vault.hashicorp.com/agent-inject-token: "true"
+
+{{/*        vault.hashicorp.com/agent-inject-secret-approle-config.txt: "secret/cisco/app-secrets/{{ .Values.env.test.vaultRoleId }}/{{ .Values.env.test.dataCenter }}/secret-id"*/}}
+{{/*        vault.hashicorp.com/agent-inject-template-approle-config.txt: |*/}}
+{{/*            {{ "{{" }}- with secret "secret/cisco/app-secrets/{{ .Values.env.test.vaultRoleId }}/{{ .Values.env.test.dataCenter }}/secret-id" -{{ "}}" }}*/}}
+{{/*            {{ "{{" }} .Data.credentialsid {{ "}}" }}*/}}
+{{/*            {{ "{{" }}- end -{{ "}}" }}*/}}
+
+        vault.hashicorp.com/agent-inject-secret-k8s-logs-creds.ini: "secret/{{ .Values.env.test.dataCenter }}/{{.Values.env.test.awsCredsVaultPath}}"
+        vault.hashicorp.com/agent-inject-template-k8s-logs-creds.ini: |
+            {{ "{{" }}- with secret "secret/{{ .Values.env.test.dataCenter }}/{{.Values.env.test.awsCredsVaultPath}}" -{{ "}}" }}
+            id = {{ "{{" }} .Data.id {{ "}}" }}
+            key = {{ "{{" }} .Data.key {{ "}}" }}
+            {{ "{{" }}- end -{{ "}}" }}
+
+        # machine-account creds
+        # writes orgId, name and password from `secret/{DCNAME}/saa-agentburnout/saa-agentburnout-{DCNAME}-machine` to /vault/secrets/machine-account.txt
+        vault.hashicorp.com/agent-inject-secret-machine-account.ini: "secret/{{ .Values.datacenter }}/saa-agentburnout/saa-agentburnout-{{ .Values.datacenter }}-machine"
+        vault.hashicorp.com/agent-inject-template-machine-account.ini: |
+          {{ "{{" }} with secret "secret/{{ .Values.datacenter }}/saa-agentburnout/saa-agentburnout-{{ .Values.datacenter }}-machine" -{{ "}}" }}
+            [default]
+          name={{ "{{" }} .Data.name {{ "}}" }}
+          password={{ "{{" }} .Data.password {{ "}}" }}
+          org_id={{ "{{" }} .Data.orgId {{ "}}" }}
+          {{ "{{" }}- end {{ "}}" }}
+
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+    {{- range $name, $value := .Values.env.required }}
+    {{- if not (empty $value) }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+    {{- end }}
+    {{- end }}
+    {{- range $name, $value := .Values.env.optional }}
+    {{- if not (empty $value) }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+    {{- end }}
+    {{- end }}
+    {{- range $name, $value := .Values.env.test }}
+    {{- if not (empty $value) }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+    {{- end}}
+    {{- end}}
+          resources:
+            limits:
+              cpu: 100m
+              memory: 400Mi
+            requests:
+              cpu: 100m
+              memory: 400Mi
+      restartPolicy: Never

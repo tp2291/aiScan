@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "agentburnout-detector.deploymentName" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "agentburnout-detector.labels.standard" . | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      appName: {{ .Values.env.required.appName }}
+      appPrefix: {{ .Values.env.optional.appPrefix }}
+      appService: "{{ .Values.env.required.appName }}{{ .Values.env.optional.appPrefix }}"
+  replicas: {{ .Values.env.required.replicaCount }}
+  revisionHistoryLimit: 10
+  template:
+    metadata:
+      name: {{ include "agentburnout-detector.deploymentName" . }}
+      labels:
+        appName: {{ .Values.env.required.appName }}
+        appPrefix: {{ .Values.env.optional.appPrefix }}
+        appService: "{{ .Values.env.required.appName }}{{ .Values.env.optional.appPrefix }}"
+        version: "{{ include "agentburnout-detector.deploymentName" . }}"
+      annotations:
+        "sidecar.istio.io/inject": "false"
+        vault.hashicorp.com/agent-init-first: "true" # avoid race condition
+        vault.hashicorp.com/agent-inject: "true"
+
+        # authentication
+        vault.hashicorp.com/auth-type: "approle"
+        vault.hashicorp.com/auth-path: "auth/{{ .Values.env.required.DC }}/approle"
+
+        # read vault secret and role-id from k8s secret
+        vault.hashicorp.com/agent-extra-secret: "keeper-creds"
+        vault.hashicorp.com/auth-config-role-id-file-path: "/vault/custom/role-id"
+        vault.hashicorp.com/auth-config-secret-id-file-path: "/vault/custom/secret-id"
+
+        vault.hashicorp.com/agent-pre-populate-only: "true"
+
+        # keeper namespacing
+        vault.hashicorp.com/namespace: "webexcc"
+
+        # ask SRE
+        vault.hashicorp.com/tls-skip-verify: "true"
+        vault.hashicorp.com/agent-inject-token: "true"
+
+        # writes username and password from `secret/{DCNAME}/aurora/agentburnout` to /vault/secrets/aurora-creds.ini
+        vault.hashicorp.com/agent-inject-secret-aurora-creds.ini: "secret/{{ .Values.env.required.DC }}/aurora/agentburnout"
+        vault.hashicorp.com/agent-inject-template-aurora-creds.ini: |
+          {{ "{{" }} with secret "secret/{{ .Values.env.required.DC }}/aurora/agentburnout" -{{ "}}" }}
+            [default]
+          username={{ "{{" }} .Data.username {{ "}}" }}
+          password={{ "{{" }} .Data.password {{ "}}" }}
+          {{ "{{" }}- end {{ "}}" }}
+        # redis creds
+        vault.hashicorp.com/agent-inject-secret-redis.txt: "secret/{{ .Values.env.required.DC }}/elasticache/sunlight"
+        vault.hashicorp.com/agent-inject-template-redis.txt: |
+          {{ "{{" }} with secret "secret/{{ .Values.env.required.DC }}/elasticache/sunlight" -{{ "}}" }}
+          password={{ "{{" }} .Data.password {{ "}}" }}
+          {{ "{{" }}- end {{ "}}" }}
+
+
+
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+{{- range $name, $value := .Values.env.optional }}
+{{- if not (empty $value) }}
+        - name: {{ $name | quote }}
+          value: {{ $value | quote }}
+{{- end }}
+{{- end }}
+{{- range $name, $value := .Values.env.required }}
+        - name: {{ $name | quote }}
+          value: {{ $value | quote }}
+{{- end }}
+      {{- with .Values.resources }}
+        resources:
+{{ toYaml . | indent 10 }}
+      {{- end }}

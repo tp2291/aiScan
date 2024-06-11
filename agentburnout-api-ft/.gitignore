@@ -1,0 +1,7 @@
+#Resources
+TestScripts/log.html
+TestScripts/output.xml
+TestScripts/report.html
+TestScripts/selenium-screenshot*.png
+TestScripts/logs/*
+CustomLibraries/CredValues.py

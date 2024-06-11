@@ -1,0 +1,67 @@
+{{- $root := . -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "app.jobname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "app.labels.standard" . | indent 4 }}
+spec:
+  completions: 1
+  parallelism: 1
+  ttlSecondsAfterFinished: 300  #5 minutes
+  backoffLimit: 0
+  template:
+    metadata:
+      name: {{ include "app.fullname" . }}
+      annotations:
+        "sidecar.istio.io/inject": "false"
+        vault.hashicorp.com/agent-init-first: "true" # avoid race condition
+        vault.hashicorp.com/agent-inject: "true"
+
+        # authentication
+        vault.hashicorp.com/auth-type: "approle"
+        vault.hashicorp.com/auth-path: "auth/{{ .Values.datacenter }}/approle"
+
+        # read vault secret and role-id from k8s secret
+        vault.hashicorp.com/agent-extra-secret: "keeper-creds"
+        vault.hashicorp.com/auth-config-role-id-file-path: "/vault/custom/role-id"
+        vault.hashicorp.com/auth-config-secret-id-file-path: "/vault/custom/secret-id"
+
+        vault.hashicorp.com/agent-pre-populate-only: "true"
+
+        # keeper namespacing
+        vault.hashicorp.com/namespace: "webexcc"
+
+        # ask SRE
+        vault.hashicorp.com/tls-skip-verify: "true"
+        vault.hashicorp.com/agent-inject-token: "true"
+        vault.hashicorp.com/agent-inject-secret-aurora-creds.ini: "secret/{{ .Values.datacenter }}/aurora/agentburnout"
+        vault.hashicorp.com/agent-inject-template-aurora-creds.ini: |
+          {{ "{{" }} with secret "secret/{{ .Values.datacenter }}/aurora/agentburnout" -{{ "}}" }}
+            [default]
+          username={{ "{{" }} .Data.username {{ "}}" }}
+          password={{ "{{" }} .Data.password {{ "}}" }}
+          {{ "{{" }}- end {{ "}}" }}
+      labels:
+        appName: {{ .Values.env.required.appName }}
+        appPrefix: {{ .Values.env.optional.appPrefix }}
+        appTestJobName: {{ include "app.jobname" . }}
+    spec:
+      containers:
+      - name: {{ include "app.fullname" . }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+          - name: "datacenter"
+            value: {{ .Values.datacenter | quote  }}
+          - name: "appName"
+            value: {{ .Values.env.required.appName }}
+        resources:
+          limits:
+            cpu: 100m
+            memory: 400Mi
+          requests:
+            cpu: 100m
+            memory: 400Mi
+      restartPolicy: Never

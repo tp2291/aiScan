@@ -1,0 +1,40 @@
+image:
+  repository: 244386282524.dkr.ecr.us-west-2.amazonaws.com/saa-agentburnout/agentburnout-load
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env:
+  required:
+    appName: agentburnout-load
+    buildNumber: JENKINS_ENV.BUILD_NUMBER
+    buildId: JENKINS_ENV.BUILD_ID
+    buildUrl: JENKINS_ENV.BUILD_URL
+    buildTag: JENKINS_ENV.BUILD_TAG
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX
+  test:
+    awsS3Bucket: "k8s-pipeline-logs-cache"
+    awsS3Region: "us-east-1"
+    awsCredsVaultPath: "k8s_pipeline_logs_cache/s3_access_key"
+    clusterType: "main"
+    awsS3TestArtifactsFolderPrefix: JENKINS_ENV.TEST_BUCKET_PREFIX
+    secretFilePath: "/vault/secrets/approle-config.txt"
+    vaultRoleId: "saa-agentburnout"
+    useVaultSideCar: "true"
+
+datacenter: override
+serviceAccount:
+  create: false
+
+service:
+  type: ClusterIP
+  externalPort: 9090
+  annotations: { }
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1024Mi
+  requests:
+    cpu: 1000m
+    memory: 1024Mi

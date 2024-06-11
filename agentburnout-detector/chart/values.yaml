@@ -1,0 +1,30 @@
+image:
+  # repository: 300447193107.dkr.ecr.us-east-1.amazonaws.com/saa-agentburnout-dev
+  repository: 244386282524.dkr.ecr.us-west-2.amazonaws.com/saa-agentburnout/agentburnout-detector
+  pullPolicy: IfNotPresent
+  tag: override
+
+env:
+  required:
+    appName: agentburnout-detector
+    DC: override
+    REDIS_HOST: override
+    replicaCount: 3
+    gitCommit: REPLACE_WITH_TAG
+  optional:
+    appPrefix: override
+    logger: override
+
+
+service:
+  type: ClusterIP
+  externalPort: 9090
+  annotations: { }
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 200Mi
+  requests:
+    cpu: 200m
+    memory: 200Mi

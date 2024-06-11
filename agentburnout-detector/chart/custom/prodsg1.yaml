@@ -1,0 +1,10 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+env:
+  required:
+    DC: prodsg1
+    REDIS_HOST: clustercfg.prodsg1-sunlight.vcdxnj.apse1.cache.amazonaws.com
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX

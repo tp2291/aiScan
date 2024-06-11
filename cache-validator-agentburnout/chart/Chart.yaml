@@ -1,0 +1,9 @@
+apiVersion: v1
+appVersion: 1.0.0
+keywords:
+- cache-validator-agentburnout
+- helm
+- commitId:16ae48a24f2079e8ecf66e5167c8b2b9f05ab052
+- baseImage:amazon_jre17_base:17.0.10-24.05.03
+name: cache-validator-agentburnout
+version: 1.0.17-0

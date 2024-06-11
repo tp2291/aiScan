@@ -1,0 +1,10 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+env:
+  required:
+    DC: appstaging
+    REDIS_HOST: clustercfg.appstaging-sunlight.ik2bpp.use1.cache.amazonaws.com
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX

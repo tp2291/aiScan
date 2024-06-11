@@ -1,0 +1,141 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "abac-transcription-processor.deploymentName" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "abac-transcription-processor.labels.standard" . | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      appName: {{ .Values.env.required.appName }}
+      appPrefix: {{ .Values.env.optional.appPrefix }}
+      appService: "{{ .Values.env.required.appName }}{{ .Values.env.optional.appPrefix }}"
+  replicas: {{ .Values.env.required.replicaCount }}
+  strategy:
+{{ toYaml .Values.strategy | indent 4 }}
+  revisionHistoryLimit: 10
+  template:
+    metadata:
+      name: {{ include "abac-transcription-processor.deploymentName" . }}
+      labels:
+        appName: {{ .Values.env.required.appName }}
+        appPrefix: {{ .Values.env.optional.appPrefix }}
+        appService: "{{ .Values.env.required.appName }}{{ .Values.env.optional.appPrefix }}"
+        version: "{{ include "abac-transcription-processor.deploymentName" . }}"
+      annotations:
+        vault.hashicorp.com/agent-init-first: "true" # avoid race condition
+        vault.hashicorp.com/agent-inject: "true"
+
+        # authentication
+        vault.hashicorp.com/auth-type: "approle"
+        vault.hashicorp.com/auth-path: "auth/{{ .Values.env.required.DC }}/approle"
+
+        # read vault secret and role-id from k8s secret
+        vault.hashicorp.com/agent-extra-secret: "keeper-creds"
+        vault.hashicorp.com/auth-config-role-id-file-path: "/vault/custom/role-id"
+        vault.hashicorp.com/auth-config-secret-id-file-path: "/vault/custom/secret-id"
+        vault.hashicorp.com/agent-pre-populate-only: "true"
+
+        # keeper namespacing
+        vault.hashicorp.com/namespace: "webexcc"
+
+        # ask SRE
+        vault.hashicorp.com/tls-skip-verify: "true"
+        vault.hashicorp.com/agent-inject-token: "true"
+        # machine-account creds
+        # writes orgId, name and password from `secret/{DCNAME}/saa-agentburnout/saa-agentburnout-{DCNAME}-machine` to /vault/secrets/machine-account.txt
+        vault.hashicorp.com/agent-inject-secret-machine-account.txt: "secret/{{ .Values.env.required.DC }}/saa-agentburnout/saa-agentburnout-{{ .Values.env.required.DC }}-machine"
+        vault.hashicorp.com/agent-inject-template-machine-account.txt: |
+          {{ "{{" }} with secret "secret/{{ .Values.env.required.DC }}/saa-agentburnout/saa-agentburnout-{{ .Values.env.required.DC }}-machine" -{{ "}}" }}
+          name={{ "{{" }} .Data.name {{ "}}" }}
+          password={{ "{{" }} .Data.password {{ "}}" }}
+          orgId={{ "{{" }} .Data.orgId {{ "}}" }}
+          {{ "{{" }}- end {{ "}}" }}
+        # redis creds
+        # writes password from `secret/{DCNAME}/elasticache/sunlight` to /vault/secrets/redis.txt
+        vault.hashicorp.com/agent-inject-secret-redis.txt: "secret/{{ .Values.env.required.DC }}/elasticache/sunlight"
+        vault.hashicorp.com/agent-inject-template-redis.txt: |
+          {{ "{{" }} with secret "secret/{{ .Values.env.required.DC }}/elasticache/sunlight" -{{ "}}" }}
+          password={{ "{{" }} .Data.password {{ "}}" }}
+          {{ "{{" }}- end {{ "}}" }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        readinessProbe:
+          httpGet:
+            path: /build_info
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8080
+          initialDelaySeconds: 120
+          timeoutSeconds: 3
+          periodSeconds: 15
+        env:
+{{- $canaryMode := .Values.env.required.isInCanaryMode -}}
+{{- $upgradeEnabled := .Values.env.required.isCanaryUpgradeEnabled -}}
+{{- range $name, $value := .Values.env.optional }}
+{{- if not (empty $value) }}
+        - name: {{ $name | quote }}
+          value: {{ $value | quote }}
+{{- end }}
+{{- end }}
+{{- range $name, $value := .Values.env.required }}
+{{- if (and (eq $name "streamApplicationName") (and (eq ($upgradeEnabled | toString) "1") (eq ($canaryMode | toString) "1"))) }}
+        - name: {{ $name | quote }}
+          value: {{ join "" (list "canary-" (trim $value)) | quote }}
+{{- else if (and (eq $name "feedbackTopicConsumerGroupId") (and (eq ($upgradeEnabled | toString) "1") (eq ($canaryMode | toString) "1"))) }}
+        - name: {{ $name | quote }}
+          value: {{ join "" (list "canary-" (trim $value)) | quote }}
+{{- else }}
+        - name: {{ $name | quote }}
+          value: {{ $value | quote }}
+{{- end }}
+{{- end }}
+{{- $secret_name := include "abac-transcription-processor.fullname" . }}
+{{- range $name, $value := .Values.env.secret }}
+{{- if not ( empty $value) }}
+        - name: {{ $name | quote }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ $secret_name }}
+              key: {{ $name | quote }}
+{{- end }}
+{{- end }}
+        ports:
+          - name: http
+            containerPort: 8080
+            protocol: TCP
+      {{- with .Values.resources }}
+        resources:
+{{ toYaml . | indent 10 }}
+      {{- end }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- if .Values.serviceAccount.create }}
+      serviceAccountName: {{ include "abac-transcription-processor.fullname" . }}
+    {{- else if .Values.serviceAccount.name }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+    {{- end }}
+    {{- with .Values.securityContext }}
+      securityContext:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+

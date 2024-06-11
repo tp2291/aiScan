@@ -1,0 +1,9 @@
+apiVersion: v1
+appVersion: 1.0.0
+keywords:
+- abac-transcription-processor
+- helm
+- commitId:a4390b4939d34bbb7e807aa98763f0edc45705cc
+- baseImage:amazon_jre17_base:17.0.10-24.05.03
+name: abac-transcription-processor
+version: 1.0.18-0

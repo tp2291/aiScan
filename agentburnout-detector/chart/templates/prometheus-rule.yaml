@@ -1,0 +1,30 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "agentburnout-detector.name" . }}-alert-rules
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "agentburnout-detector.labels.standard" . | indent 4 }}
+spec:
+  groups:
+    - name: SAA_ABD_Alerts
+      rules:
+        # service down alert
+        - alert: ServiceDown
+          expr: absent(up{namespace="saa-agentburnout",job="{{ include "agentburnout-detector.name" . }}"})
+          for: 1m
+          labels:
+            severity: critical
+            maintainedby: saa-agentburnout
+          annotations:
+            summary: Service is down (serviceName {{ "{{" }} $labels.job {{ "}}" }})
+            description: '{{ "{{" }} $labels.job {{ "}}" }} service has been down for more than 1 minutes.'
+
+          #event processing error
+        - alert: eventProcessingError
+          expr: sum(increase(EVENT_SKIPPED_COUNT{namespace="saa-agentburnout",job="{{ include "agentburnout-detector.name" . }}"}[1m])) >= 3
+          labels:
+            severity: warning
+            maintainedby: saa-agentburnout
+          annotations:
+            summary: Errors encountered in processing events

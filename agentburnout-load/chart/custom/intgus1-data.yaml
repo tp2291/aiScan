@@ -1,0 +1,16 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+replicaCount: 1
+
+datacenter: intgus1
+cluster: intgus1
+spring:
+  profile: intgus1
+env:
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX
+  required:
+#    DC: intgus1
+    replicaCount: 1

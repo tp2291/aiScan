@@ -1,0 +1,2195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.3 (Python 3.11.0 on darwin)" generated="20240508 11:00:42.892" rpa="false" schemaversion="2">
+<suite id="s1" name="Teste2E" source="/Users/trishala/PycharmProjects/saa-agentburnout/agentburnout-ft/TestScripts/teste2e.robot">
+<test id="s1-t1" name="Simulate Call Flow and Verify AgentBurnout E2E">
+<kw name="Login to the agent desktop and enter dn" library="GenericCallSimulation" type="SETUP">
+<kw name="Start">
+<msg timestamp="20240508 11:00:43.052" level="FAIL">Multiple keywords with name 'Start' found. Give the full name of the keyword you want to use:
+    CallSimulation.Start
+    Generic.Start</msg>
+<status status="FAIL" starttime="20240508 11:00:43.052" endtime="20240508 11:00:43.052"/>
+</kw>
+<kw name="Open Browser and login to agent" library="JSobjects">
+<arg>${${ENV}}</arg>
+<status status="NOT RUN" starttime="20240508 11:00:43.052" endtime="20240508 11:00:43.052"/>
+</kw>
+<kw name="Check DN radio button status and click dn radio button" library="JSobjects">
+<status status="NOT RUN" starttime="20240508 11:00:43.052" endtime="20240508 11:00:43.052"/>
+</kw>
+<kw name="Check for international dial number checkbox and enable" library="JSobjects">
+<status status="NOT RUN" starttime="20240508 11:00:43.052" endtime="20240508 11:00:43.052"/>
+</kw>
+<kw name="Input dial number" library="JSobjects">
+<arg>${${AGENT}}[AGENT_DN]</arg>
+<status status="NOT RUN" starttime="20240508 11:00:43.052" endtime="20240508 11:00:43.052"/>
+</kw>
+<kw name="Check for remember details checkbox and disable" library="JSobjects">
+<status status="NOT RUN" starttime="20240508 11:00:43.052" endtime="20240508 11:00:43.052"/>
+</kw>
+<kw name="Click submit" library="JSobjects">
+<status status="NOT RUN" starttime="20240508 11:00:43.052" endtime="20240508 11:00:43.052"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:00:43.052" endtime="20240508 11:00:43.053"/>
+</kw>
+<kw name="Logout from the agent" library="GenericCallSimulation" type="TEARDOWN">
+<kw name="Logout SAA agent" library="JSobjects">
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:00:48.056" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20240508 11:00:43.053" endtime="20240508 11:00:48.057"/>
+</kw>
+<kw name="Agent Profile Menu" library="common_js">
+<var>${js}</var>
+<msg timestamp="20240508 11:00:48.058" level="INFO">${js} = 
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.query...</msg>
+<status status="PASS" starttime="20240508 11:00:48.057" endtime="20240508 11:00:48.058"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>10x</arg>
+<arg>1.5s</arg>
+<arg>Execute Javascript</arg>
+<arg>${js}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>${js}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240508 11:00:48.060" level="INFO">Executing JavaScript:
+
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('md-avatar').click();
+                
+Without any arguments.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:00:48.060" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:00:48.060" endtime="20240508 11:00:48.060"/>
+</kw>
+<msg timestamp="20240508 11:00:48.064" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:00:48.064" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/javascript.py", line 73, in execute_javascript
+    return self.driver.execute_script(js_code, *js_args)
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:00:48.059" endtime="20240508 11:00:48.064"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>${js}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240508 11:00:49.567" level="INFO">Executing JavaScript:
+
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('md-avatar').click();
+                
+Without any arguments.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:00:49.567" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:00:49.567" endtime="20240508 11:00:49.567"/>
+</kw>
+<msg timestamp="20240508 11:00:49.568" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:00:49.568" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/javascript.py", line 73, in execute_javascript
+    return self.driver.execute_script(js_code, *js_args)
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:00:49.566" endtime="20240508 11:00:49.568"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>${js}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240508 11:00:51.070" level="INFO">Executing JavaScript:
+
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('md-avatar').click();
+                
+Without any arguments.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:00:51.070" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:00:51.070" endtime="20240508 11:00:51.071"/>
+</kw>
+<msg timestamp="20240508 11:00:51.071" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:00:51.071" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/javascript.py", line 73, in execute_javascript
+    return self.driver.execute_script(js_code, *js_args)
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:00:51.069" endtime="20240508 11:00:51.071"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>${js}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240508 11:00:52.578" level="INFO">Executing JavaScript:
+
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('md-avatar').click();
+                
+Without any arguments.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:00:52.578" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:00:52.578" endtime="20240508 11:00:52.578"/>
+</kw>
+<msg timestamp="20240508 11:00:52.579" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:00:52.579" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/javascript.py", line 73, in execute_javascript
+    return self.driver.execute_script(js_code, *js_args)
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:00:52.573" endtime="20240508 11:00:52.579"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>${js}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240508 11:00:54.082" level="INFO">Executing JavaScript:
+
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('md-avatar').click();
+                
+Without any arguments.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:00:54.083" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:00:54.083" endtime="20240508 11:00:54.083"/>
+</kw>
+<msg timestamp="20240508 11:00:54.084" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:00:54.084" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/javascript.py", line 73, in execute_javascript
+    return self.driver.execute_script(js_code, *js_args)
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:00:54.082" endtime="20240508 11:00:54.084"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>${js}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240508 11:00:55.587" level="INFO">Executing JavaScript:
+
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('md-avatar').click();
+                
+Without any arguments.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:00:55.588" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:00:55.588" endtime="20240508 11:00:55.588"/>
+</kw>
+<msg timestamp="20240508 11:00:55.588" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:00:55.588" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/javascript.py", line 73, in execute_javascript
+    return self.driver.execute_script(js_code, *js_args)
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:00:55.586" endtime="20240508 11:00:55.588"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>${js}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240508 11:00:57.091" level="INFO">Executing JavaScript:
+
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('md-avatar').click();
+                
+Without any arguments.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:00:57.092" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:00:57.091" endtime="20240508 11:00:57.092"/>
+</kw>
+<msg timestamp="20240508 11:00:57.092" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:00:57.093" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/javascript.py", line 73, in execute_javascript
+    return self.driver.execute_script(js_code, *js_args)
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:00:57.090" endtime="20240508 11:00:57.093"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>${js}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240508 11:00:58.596" level="INFO">Executing JavaScript:
+
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('md-avatar').click();
+                
+Without any arguments.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:00:58.597" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:00:58.597" endtime="20240508 11:00:58.597"/>
+</kw>
+<msg timestamp="20240508 11:00:58.598" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:00:58.599" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/javascript.py", line 73, in execute_javascript
+    return self.driver.execute_script(js_code, *js_args)
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:00:58.594" endtime="20240508 11:00:58.599"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>${js}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240508 11:01:00.100" level="INFO">Executing JavaScript:
+
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('md-avatar').click();
+                
+Without any arguments.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:00.100" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:00.100" endtime="20240508 11:01:00.100"/>
+</kw>
+<msg timestamp="20240508 11:01:00.101" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:00.101" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/javascript.py", line 73, in execute_javascript
+    return self.driver.execute_script(js_code, *js_args)
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:00.100" endtime="20240508 11:01:00.101"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>${js}</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240508 11:01:01.609" level="INFO">Executing JavaScript:
+
+                     document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('md-avatar').click();
+                
+Without any arguments.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:01.609" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:01.609" endtime="20240508 11:01:01.609"/>
+</kw>
+<msg timestamp="20240508 11:01:01.611" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:01.611" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/javascript.py", line 73, in execute_javascript
+    return self.driver.execute_script(js_code, *js_args)
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:01.607" endtime="20240508 11:01:01.612"/>
+</kw>
+<msg timestamp="20240508 11:01:01.612" level="FAIL">Keyword 'Execute Javascript' failed after retrying 10 times. The last error was: No browser is open.</msg>
+<msg timestamp="20240508 11:01:01.612" level="DEBUG">Traceback (most recent call last):
+  None</msg>
+<status status="FAIL" starttime="20240508 11:00:48.058" endtime="20240508 11:01:01.612"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Wait Until Keyword Succeeds</arg>
+<arg>10x</arg>
+<arg>1.5s</arg>
+<arg>Click Element</arg>
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>10x</arg>
+<arg>1.5s</arg>
+<arg>Click Element</arg>
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:01.613" level="INFO">Clicking element 'dom:document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('[data-testid="signoutButton"]')'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:01.614" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:01.613" endtime="20240508 11:01:01.614"/>
+</kw>
+<msg timestamp="20240508 11:01:01.616" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:01.616" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:01.613" endtime="20240508 11:01:01.616"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:03.122" level="INFO">Clicking element 'dom:document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('[data-testid="signoutButton"]')'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:03.123" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:03.122" endtime="20240508 11:01:03.123"/>
+</kw>
+<msg timestamp="20240508 11:01:03.124" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:03.124" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:03.120" endtime="20240508 11:01:03.124"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:04.628" level="INFO">Clicking element 'dom:document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('[data-testid="signoutButton"]')'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:04.629" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:04.629" endtime="20240508 11:01:04.629"/>
+</kw>
+<msg timestamp="20240508 11:01:04.630" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:04.630" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:04.626" endtime="20240508 11:01:04.630"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:06.133" level="INFO">Clicking element 'dom:document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('[data-testid="signoutButton"]')'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:06.134" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:06.133" endtime="20240508 11:01:06.134"/>
+</kw>
+<msg timestamp="20240508 11:01:06.135" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:06.135" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:06.132" endtime="20240508 11:01:06.135"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:07.637" level="INFO">Clicking element 'dom:document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('[data-testid="signoutButton"]')'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:07.637" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:07.637" endtime="20240508 11:01:07.637"/>
+</kw>
+<msg timestamp="20240508 11:01:07.639" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:07.639" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:07.636" endtime="20240508 11:01:07.639"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:09.140" level="INFO">Clicking element 'dom:document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('[data-testid="signoutButton"]')'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:09.140" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:09.140" endtime="20240508 11:01:09.140"/>
+</kw>
+<msg timestamp="20240508 11:01:09.141" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:09.141" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:09.139" endtime="20240508 11:01:09.141"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:10.645" level="INFO">Clicking element 'dom:document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('[data-testid="signoutButton"]')'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:10.645" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:10.645" endtime="20240508 11:01:10.645"/>
+</kw>
+<msg timestamp="20240508 11:01:10.647" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:10.647" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:10.644" endtime="20240508 11:01:10.647"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:12.151" level="INFO">Clicking element 'dom:document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('[data-testid="signoutButton"]')'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:12.152" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:12.151" endtime="20240508 11:01:12.152"/>
+</kw>
+<msg timestamp="20240508 11:01:12.154" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:12.154" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:12.149" endtime="20240508 11:01:12.154"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:13.658" level="INFO">Clicking element 'dom:document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('[data-testid="signoutButton"]')'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:13.659" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:13.659" endtime="20240508 11:01:13.659"/>
+</kw>
+<msg timestamp="20240508 11:01:13.663" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:13.663" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:13.657" endtime="20240508 11:01:13.663"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_INITIATE_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:15.165" level="INFO">Clicking element 'dom:document.querySelector( 'agentx-app' ).shadowRoot.querySelector( 'md-theme' ).querySelector('router-view').shadowRoot.querySelector('agentx-react-agent-profile').shadowRoot.querySelector('[data-testid="signoutButton"]')'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:15.165" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:15.165" endtime="20240508 11:01:15.165"/>
+</kw>
+<msg timestamp="20240508 11:01:15.167" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:15.167" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:15.164" endtime="20240508 11:01:15.167"/>
+</kw>
+<msg timestamp="20240508 11:01:15.167" level="FAIL">Keyword 'Click Element' failed after retrying 10 times. The last error was: No browser is open.</msg>
+<msg timestamp="20240508 11:01:15.167" level="DEBUG">Traceback (most recent call last):
+  None</msg>
+<status status="FAIL" starttime="20240508 11:01:01.612" endtime="20240508 11:01:15.167"/>
+</kw>
+<status status="PASS" starttime="20240508 11:01:01.612" endtime="20240508 11:01:15.167"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>10x</arg>
+<arg>1.5s</arg>
+<arg>Click Element</arg>
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:15.167" level="INFO">Clicking element 'dom:document.querySelector("agentx-app").shadowRoot.querySelector("router-view").shadowRoot.querySelector("agentx-react-agent-profile").shadowRoot.querySelector("md-button[arialabel='Sign Out']")'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:15.167" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:15.167" endtime="20240508 11:01:15.167"/>
+</kw>
+<msg timestamp="20240508 11:01:15.168" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:15.168" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:15.167" endtime="20240508 11:01:15.168"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:16.670" level="INFO">Clicking element 'dom:document.querySelector("agentx-app").shadowRoot.querySelector("router-view").shadowRoot.querySelector("agentx-react-agent-profile").shadowRoot.querySelector("md-button[arialabel='Sign Out']")'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:16.670" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:16.670" endtime="20240508 11:01:16.670"/>
+</kw>
+<msg timestamp="20240508 11:01:16.671" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:16.671" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:16.669" endtime="20240508 11:01:16.672"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:18.174" level="INFO">Clicking element 'dom:document.querySelector("agentx-app").shadowRoot.querySelector("router-view").shadowRoot.querySelector("agentx-react-agent-profile").shadowRoot.querySelector("md-button[arialabel='Sign Out']")'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:18.175" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:18.175" endtime="20240508 11:01:18.175"/>
+</kw>
+<msg timestamp="20240508 11:01:18.177" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:18.177" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:18.173" endtime="20240508 11:01:18.177"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:19.684" level="INFO">Clicking element 'dom:document.querySelector("agentx-app").shadowRoot.querySelector("router-view").shadowRoot.querySelector("agentx-react-agent-profile").shadowRoot.querySelector("md-button[arialabel='Sign Out']")'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:19.685" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:19.684" endtime="20240508 11:01:19.685"/>
+</kw>
+<msg timestamp="20240508 11:01:19.686" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:19.686" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:19.680" endtime="20240508 11:01:19.686"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:21.189" level="INFO">Clicking element 'dom:document.querySelector("agentx-app").shadowRoot.querySelector("router-view").shadowRoot.querySelector("agentx-react-agent-profile").shadowRoot.querySelector("md-button[arialabel='Sign Out']")'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:21.189" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:21.189" endtime="20240508 11:01:21.189"/>
+</kw>
+<msg timestamp="20240508 11:01:21.194" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:21.194" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:21.187" endtime="20240508 11:01:21.194"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:22.698" level="INFO">Clicking element 'dom:document.querySelector("agentx-app").shadowRoot.querySelector("router-view").shadowRoot.querySelector("agentx-react-agent-profile").shadowRoot.querySelector("md-button[arialabel='Sign Out']")'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:22.699" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:22.698" endtime="20240508 11:01:22.699"/>
+</kw>
+<msg timestamp="20240508 11:01:22.701" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:22.701" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:22.697" endtime="20240508 11:01:22.701"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:24.205" level="INFO">Clicking element 'dom:document.querySelector("agentx-app").shadowRoot.querySelector("router-view").shadowRoot.querySelector("agentx-react-agent-profile").shadowRoot.querySelector("md-button[arialabel='Sign Out']")'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:24.206" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:24.205" endtime="20240508 11:01:24.206"/>
+</kw>
+<msg timestamp="20240508 11:01:24.208" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:24.208" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:24.203" endtime="20240508 11:01:24.209"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:25.712" level="INFO">Clicking element 'dom:document.querySelector("agentx-app").shadowRoot.querySelector("router-view").shadowRoot.querySelector("agentx-react-agent-profile").shadowRoot.querySelector("md-button[arialabel='Sign Out']")'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:25.712" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:25.712" endtime="20240508 11:01:25.712"/>
+</kw>
+<msg timestamp="20240508 11:01:25.713" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:25.713" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:25.712" endtime="20240508 11:01:25.713"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:27.218" level="INFO">Clicking element 'dom:document.querySelector("agentx-app").shadowRoot.querySelector("router-view").shadowRoot.querySelector("agentx-react-agent-profile").shadowRoot.querySelector("md-button[arialabel='Sign Out']")'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:27.218" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:27.218" endtime="20240508 11:01:27.218"/>
+</kw>
+<msg timestamp="20240508 11:01:27.220" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:27.220" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:27.216" endtime="20240508 11:01:27.220"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>dom:${KAD_LOGOUT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240508 11:01:28.725" level="INFO">Clicking element 'dom:document.querySelector("agentx-app").shadowRoot.querySelector("router-view").shadowRoot.querySelector("agentx-react-agent-profile").shadowRoot.querySelector("md-button[arialabel='Sign Out']")'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:28.725" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:28.725" endtime="20240508 11:01:28.725"/>
+</kw>
+<msg timestamp="20240508 11:01:28.729" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:28.729" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/element.py", line 658, in click_element
+    self.find_element(locator).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 82, in find_element
+    return self.element_finder.find(locator, tag, True, required, parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 92, in find
+    return self._find(locators[-1], tag, first_only, required, element)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/locators/elementfinder.py", line 122, in _find
+    elements = strategy(criteria, tag, constraints, parent=parent or self.driver)
+                                                                     ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:28.723" endtime="20240508 11:01:28.729"/>
+</kw>
+<msg timestamp="20240508 11:01:28.729" level="FAIL">Keyword 'Click Element' failed after retrying 10 times. The last error was: No browser is open.</msg>
+<msg timestamp="20240508 11:01:28.729" level="DEBUG">Traceback (most recent call last):
+  None</msg>
+<status status="FAIL" starttime="20240508 11:01:15.167" endtime="20240508 11:01:28.729"/>
+</kw>
+<kw name="Check Whether Logout Was Successful" library="JSobjects">
+<kw name="Set Variable" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240508 11:01:28.730" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:28.729" endtime="20240508 11:01:28.730"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${is_agent_logged_out}</var>
+<arg>${True}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240508 11:01:28.730" level="INFO">${is_agent_logged_out} = True</msg>
+<status status="PASS" starttime="20240508 11:01:28.730" endtime="20240508 11:01:28.730"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${iter}</var>
+<value>15</value>
+<iter>
+<var name="${iter}">0</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:28.730" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:28.730" endtime="20240508 11:01:28.730"/>
+</kw>
+<msg timestamp="20240508 11:01:28.733" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:28.733" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:28.733" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:28.730" endtime="20240508 11:01:28.733"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:28.734" endtime="20240508 11:01:28.734"/>
+</kw>
+<msg timestamp="20240508 11:01:28.734" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:28.733" endtime="20240508 11:01:28.734"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:28.734" endtime="20240508 11:01:28.734"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:30.235" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:28.734" endtime="20240508 11:01:30.235"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:28.730" endtime="20240508 11:01:30.236"/>
+</iter>
+<iter>
+<var name="${iter}">1</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:30.237" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:30.237" endtime="20240508 11:01:30.237"/>
+</kw>
+<msg timestamp="20240508 11:01:30.239" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:30.241" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:30.241" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:30.237" endtime="20240508 11:01:30.241"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:30.242" endtime="20240508 11:01:30.242"/>
+</kw>
+<msg timestamp="20240508 11:01:30.242" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:30.241" endtime="20240508 11:01:30.242"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:30.242" endtime="20240508 11:01:30.242"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:31.745" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:30.242" endtime="20240508 11:01:31.746"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:30.236" endtime="20240508 11:01:31.746"/>
+</iter>
+<iter>
+<var name="${iter}">2</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:31.747" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:31.747" endtime="20240508 11:01:31.747"/>
+</kw>
+<msg timestamp="20240508 11:01:31.748" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:31.748" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:31.748" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:31.747" endtime="20240508 11:01:31.748"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:31.749" endtime="20240508 11:01:31.749"/>
+</kw>
+<msg timestamp="20240508 11:01:31.749" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:31.748" endtime="20240508 11:01:31.749"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:31.750" endtime="20240508 11:01:31.750"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:33.252" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:31.750" endtime="20240508 11:01:33.253"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:31.746" endtime="20240508 11:01:33.253"/>
+</iter>
+<iter>
+<var name="${iter}">3</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:33.254" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:33.254" endtime="20240508 11:01:33.254"/>
+</kw>
+<msg timestamp="20240508 11:01:33.254" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:33.254" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:33.254" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:33.253" endtime="20240508 11:01:33.254"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:33.255" endtime="20240508 11:01:33.255"/>
+</kw>
+<msg timestamp="20240508 11:01:33.255" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:33.255" endtime="20240508 11:01:33.255"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:33.255" endtime="20240508 11:01:33.255"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:34.756" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:33.255" endtime="20240508 11:01:34.756"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:33.253" endtime="20240508 11:01:34.757"/>
+</iter>
+<iter>
+<var name="${iter}">4</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:34.758" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:34.758" endtime="20240508 11:01:34.758"/>
+</kw>
+<msg timestamp="20240508 11:01:34.759" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:34.759" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:34.759" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:34.757" endtime="20240508 11:01:34.759"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:34.760" endtime="20240508 11:01:34.760"/>
+</kw>
+<msg timestamp="20240508 11:01:34.760" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:34.759" endtime="20240508 11:01:34.760"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:34.760" endtime="20240508 11:01:34.760"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:36.262" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:34.761" endtime="20240508 11:01:36.262"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:34.757" endtime="20240508 11:01:36.262"/>
+</iter>
+<iter>
+<var name="${iter}">5</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:36.263" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:36.263" endtime="20240508 11:01:36.264"/>
+</kw>
+<msg timestamp="20240508 11:01:36.264" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:36.264" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:36.264" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:36.263" endtime="20240508 11:01:36.264"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:36.265" endtime="20240508 11:01:36.265"/>
+</kw>
+<msg timestamp="20240508 11:01:36.265" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:36.265" endtime="20240508 11:01:36.265"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:36.265" endtime="20240508 11:01:36.266"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:37.767" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:36.266" endtime="20240508 11:01:37.768"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:36.263" endtime="20240508 11:01:37.768"/>
+</iter>
+<iter>
+<var name="${iter}">6</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:37.770" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:37.769" endtime="20240508 11:01:37.770"/>
+</kw>
+<msg timestamp="20240508 11:01:37.771" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:37.771" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:37.771" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:37.769" endtime="20240508 11:01:37.771"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:37.772" endtime="20240508 11:01:37.772"/>
+</kw>
+<msg timestamp="20240508 11:01:37.773" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:37.772" endtime="20240508 11:01:37.773"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:37.773" endtime="20240508 11:01:37.773"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:39.273" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:37.773" endtime="20240508 11:01:39.278"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:37.768" endtime="20240508 11:01:39.278"/>
+</iter>
+<iter>
+<var name="${iter}">7</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:39.279" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:39.279" endtime="20240508 11:01:39.279"/>
+</kw>
+<msg timestamp="20240508 11:01:39.280" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:39.280" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:39.280" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:39.279" endtime="20240508 11:01:39.280"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:39.280" endtime="20240508 11:01:39.280"/>
+</kw>
+<msg timestamp="20240508 11:01:39.281" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:39.280" endtime="20240508 11:01:39.281"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:39.281" endtime="20240508 11:01:39.281"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:40.783" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:39.281" endtime="20240508 11:01:40.783"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:39.278" endtime="20240508 11:01:40.784"/>
+</iter>
+<iter>
+<var name="${iter}">8</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:40.785" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:40.785" endtime="20240508 11:01:40.785"/>
+</kw>
+<msg timestamp="20240508 11:01:40.786" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:40.787" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:40.787" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:40.785" endtime="20240508 11:01:40.788"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:40.789" endtime="20240508 11:01:40.789"/>
+</kw>
+<msg timestamp="20240508 11:01:40.789" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:40.788" endtime="20240508 11:01:40.789"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:40.789" endtime="20240508 11:01:40.789"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:42.291" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:40.789" endtime="20240508 11:01:42.291"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:40.784" endtime="20240508 11:01:42.291"/>
+</iter>
+<iter>
+<var name="${iter}">9</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:42.293" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:42.293" endtime="20240508 11:01:42.293"/>
+</kw>
+<msg timestamp="20240508 11:01:42.294" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:42.295" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:42.295" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:42.292" endtime="20240508 11:01:42.295"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:42.296" endtime="20240508 11:01:42.296"/>
+</kw>
+<msg timestamp="20240508 11:01:42.296" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:42.295" endtime="20240508 11:01:42.296"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:42.296" endtime="20240508 11:01:42.296"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:43.798" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:42.296" endtime="20240508 11:01:43.799"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:42.292" endtime="20240508 11:01:43.799"/>
+</iter>
+<iter>
+<var name="${iter}">10</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:43.801" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:43.801" endtime="20240508 11:01:43.801"/>
+</kw>
+<msg timestamp="20240508 11:01:43.802" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:43.803" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:43.803" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:43.801" endtime="20240508 11:01:43.803"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:43.804" endtime="20240508 11:01:43.804"/>
+</kw>
+<msg timestamp="20240508 11:01:43.804" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:43.803" endtime="20240508 11:01:43.804"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:43.805" endtime="20240508 11:01:43.805"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:45.306" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:43.805" endtime="20240508 11:01:45.307"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:43.800" endtime="20240508 11:01:45.307"/>
+</iter>
+<iter>
+<var name="${iter}">11</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:45.307" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:45.307" endtime="20240508 11:01:45.308"/>
+</kw>
+<msg timestamp="20240508 11:01:45.308" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:45.309" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:45.309" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:45.307" endtime="20240508 11:01:45.309"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:45.310" endtime="20240508 11:01:45.310"/>
+</kw>
+<msg timestamp="20240508 11:01:45.310" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:45.309" endtime="20240508 11:01:45.310"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:45.310" endtime="20240508 11:01:45.310"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:46.812" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:45.310" endtime="20240508 11:01:46.813"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:45.307" endtime="20240508 11:01:46.813"/>
+</iter>
+<iter>
+<var name="${iter}">12</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:46.830" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:46.815" endtime="20240508 11:01:46.830"/>
+</kw>
+<msg timestamp="20240508 11:01:46.831" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:46.831" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:46.831" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:46.814" endtime="20240508 11:01:46.831"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:46.831" endtime="20240508 11:01:46.831"/>
+</kw>
+<msg timestamp="20240508 11:01:46.832" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:46.831" endtime="20240508 11:01:46.832"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:46.832" endtime="20240508 11:01:46.832"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:48.339" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:46.832" endtime="20240508 11:01:48.339"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:46.814" endtime="20240508 11:01:48.339"/>
+</iter>
+<iter>
+<var name="${iter}">13</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:48.341" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:48.341" endtime="20240508 11:01:48.343"/>
+</kw>
+<msg timestamp="20240508 11:01:48.343" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:48.343" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:48.343" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:48.340" endtime="20240508 11:01:48.343"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:48.344" endtime="20240508 11:01:48.344"/>
+</kw>
+<msg timestamp="20240508 11:01:48.344" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:48.343" endtime="20240508 11:01:48.344"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:48.344" endtime="20240508 11:01:48.344"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:49.846" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:48.344" endtime="20240508 11:01:49.846"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:48.340" endtime="20240508 11:01:49.846"/>
+</iter>
+<iter>
+<var name="${iter}">14</var>
+<kw name="Get Title" library="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240508 11:01:49.848" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20240508 11:01:49.848" endtime="20240508 11:01:49.848"/>
+</kw>
+<msg timestamp="20240508 11:01:49.849" level="INFO">${title} = None</msg>
+<msg timestamp="20240508 11:01:49.849" level="FAIL">No browser is open.</msg>
+<msg timestamp="20240508 11:01:49.849" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 492, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/robotlibcore.py", line 126, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/keywords/browsermanagement.py", line 495, in get_title
+    return self.driver.title
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/base/context.py", line 34, in driver
+    return self.ctx.driver
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/SeleniumLibrary/__init__.py", line 563, in driver
+    raise NoOpenBrowser("No browser is open.")</msg>
+<status status="FAIL" starttime="20240508 11:01:49.847" endtime="20240508 11:01:49.849"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${is_logged_out}</var>
+<arg>'${title}' == '${IDSBROKER}'</arg>
+<arg>Set Variable</arg>
+<arg>${TRUE}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${FALSE}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240508 11:01:49.850" endtime="20240508 11:01:49.850"/>
+</kw>
+<msg timestamp="20240508 11:01:49.850" level="INFO">${is_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:49.849" endtime="20240508 11:01:49.850"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240508 11:01:49.850" endtime="20240508 11:01:49.851"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240508 11:01:51.351" level="INFO">Slept 1 second 500 milliseconds</msg>
+<status status="PASS" starttime="20240508 11:01:49.851" endtime="20240508 11:01:51.352"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:49.847" endtime="20240508 11:01:51.352"/>
+</iter>
+<status status="FAIL" starttime="20240508 11:01:28.730" endtime="20240508 11:01:51.352"/>
+</for>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out} == ${FALSE}</arg>
+<arg>Set Global Variable</arg>
+<arg>${is_agent_logged_out}</arg>
+<arg>${FALSE}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${is_agent_logged_out}</arg>
+<arg>${FALSE}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20240508 11:01:51.354" level="INFO">${is_agent_logged_out} = False</msg>
+<status status="PASS" starttime="20240508 11:01:51.353" endtime="20240508 11:01:51.354"/>
+</kw>
+<status status="PASS" starttime="20240508 11:01:51.353" endtime="20240508 11:01:51.354"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out} == ${FALSE}</arg>
+<arg>Append To List</arg>
+<arg>${Global_List}</arg>
+<arg>${agent_under_logout}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Append To List" library="Collections">
+<arg>${Global_List}</arg>
+<arg>${agent_under_logout}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20240508 11:01:51.356" level="FAIL">Variable '${Global_List}' not found.</msg>
+<status status="FAIL" starttime="20240508 11:01:51.354" endtime="20240508 11:01:51.356"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:51.354" endtime="20240508 11:01:51.356"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${is_logged_out} == ${FALSE}</arg>
+<arg>Fail</arg>
+<arg>*HTML*&lt;b&gt;Waited for 45s after clicking on logout but logout was unsuccesful ...&lt;/b&gt;</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Fail" library="BuiltIn">
+<arg>*HTML*&lt;b&gt;Waited for 45s after clicking on logout but logout was unsuccesful ...&lt;/b&gt;</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<msg timestamp="20240508 11:01:51.357" level="FAIL" html="true">&lt;b&gt;Waited for 45s after clicking on logout but logout was unsuccesful ...&lt;/b&gt;</msg>
+<msg timestamp="20240508 11:01:51.357" level="DEBUG">Traceback (most recent call last):
+  None</msg>
+<status status="FAIL" starttime="20240508 11:01:51.357" endtime="20240508 11:01:51.357"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:51.356" endtime="20240508 11:01:51.357"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:01:28.729" endtime="20240508 11:01:51.358"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:00:43.053" endtime="20240508 11:01:51.358"/>
+</kw>
+<kw name="Close All Browsers" library="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<msg timestamp="20240508 11:01:51.358" level="DEBUG">Closing all browsers.</msg>
+<status status="PASS" starttime="20240508 11:01:51.358" endtime="20240508 11:01:51.358"/>
+</kw>
+<status status="FAIL" starttime="20240508 11:00:43.053" endtime="20240508 11:01:51.358">*HTML* Several failures occurred:
+
+1) Keyword 'Execute Javascript' failed after retrying 10 times. The last error was: No browser is open.
+
+2) Keyword 'Click Element' failed after retrying 10 times. The last error was: No browser is open.
+
+3) No browser is open.
+
+4) No browser is open.
+
+5) No browser is open.
+
+6) No browser is open.
+
+7) No browser is open.
+
+8) No browser is open.
+
+    [ Message content over the limit has been removed. ]
+10) No browser is open.
+
+11) No browser is open.
+
+12) No browser is open.
+
+13) No browser is open.
+
+14) No browser is open.
+
+15) No browser is open.
+
+16) No browser is open.
+
+17) No browser is open.
+
+18) Variable '${Global_List}' not found.
+
+19) &lt;b&gt;Waited for 45s after clicking on logout but logout was unsuccesful ...&lt;/b&gt;</status>
+</kw>
+<status status="FAIL" starttime="20240508 11:00:43.052" endtime="20240508 11:01:51.359">*HTML* Setup failed:
+Multiple keywords with name 'Start' found. Give the full name of the keyword you want to use:
+    CallSimulation.Start
+    Generic.Start
+
+Also teardown failed:
+Several failures occurred:
+
+1) Keyword 'Execute Javascript' failed after retrying 10 times. The last error was: No browser is open.
+
+2) Keyword 'Click Element' failed after retrying 10 times. The last error was: No browser is open.
+
+3) No browser is open.
+
+4) No browser is open.
+
+5) No browser is open.
+
+6) No browser is open.
+
+7) No browser is open.
+
+8) No browser is open.
+
+    [ Message content over the limit has been removed. ]
+10) No browser is open.
+
+11) No browser is open.
+
+12) No browser is open.
+
+13) No browser is open.
+
+14) No browser is open.
+
+15) No browser is open.
+
+16) No browser is open.
+
+17) No browser is open.
+
+18) Variable '${Global_List}' not found.
+
+19) &lt;b&gt;Waited for 45s after clicking on logout but logout was unsuccesful ...&lt;/b&gt;</status>
+</test>
+<doc>Test Cases for Agent Burnout E2E</doc>
+<status status="FAIL" starttime="20240508 11:00:42.893" endtime="20240508 11:01:51.361"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Teste2E">Teste2E</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20240508 11:00:43.043" level="WARN">Imported library '/Users/trishala/PycharmProjects/saa-agentburnout/agentburnout-ft/CustomLibraries/AppValues.py' contains no keywords.</msg>
+<msg timestamp="20240508 11:00:43.048" level="ERROR">Error in file '/Users/trishala/PycharmProjects/saa-agentburnout/agentburnout-ft/PageObjects/GenericCallSimulation.robot' on line 4: Resource file '../ai_resources.robot' does not exist.</msg>
+</errors>
+</robot>

@@ -1,0 +1,13 @@
+image:
+  tag: REPLACE_WITH_TAG
+
+spring:
+  profile: appstaging
+env:
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX
+  required:
+    DC: appstaging
+    replicaCount: 3
+    NOTIFS_REGISTER_URL: "https://api.appstaging.ciscoccservice.com/v1/realtime/subscribe"
+

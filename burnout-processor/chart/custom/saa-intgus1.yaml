@@ -1,0 +1,9 @@
+image:
+  tag: REPLACE_WITH_TAG
+  # tag: latest
+
+env:
+  required:
+    DC: intgus1
+  optional:
+    appPrefix: JENKINS_ENV.APPNAME_PREFIX

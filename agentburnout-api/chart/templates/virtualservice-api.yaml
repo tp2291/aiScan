@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ include "agentburnout-api.fullname" . }}-api-vs
+  namespace: {{ .Release.Namespace }}
+spec:
+  hosts:
+{{- if .Values.apigateway }}
+    - {{ .Values.apigateway.vanity.url }}
+{{- else }}
+    - {{ include "agentburnout-api.api-service-host" . }}.{{ .Values.env.required.DC }}.ciscoccservice.com
+{{- end }}
+  gateways:
+    - "istio-system/default-gateway-api-alb"
+  http:
+    - match:
+        - uri:
+            prefix: "/agentburnout/"
+        - uri:
+            prefix: "/autocsat/"
+      route:
+        - destination:
+            host: {{ template "agentburnout-api.fullname" . }}
+            port:
+              number: {{ .Values.service.externalPort }}
